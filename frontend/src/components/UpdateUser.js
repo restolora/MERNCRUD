@@ -1,22 +1,22 @@
 import React, { Component }from 'react'
 
 class UpdateUser extends Component{
-    constructor(props){
-        super(props);
-        this.state = { users : [] };
-        this.getUserID = this.getUserID.bind(this);
-        this.onChangeFn = this.onChangeFn.bind(this);
-        this.onChangeLn = this.onChangeLn.bind(this);
-        this.onChangeContact = this.onChangeContact.bind(this);
-    }
-    componentDidMount(){
-        this.getUserID();
-    }
-    getUserID(){
-        fetch('http://localhost:3001/users')
-        .then(response => response.json() )
-        .then(users =>  this.setState({users}));
-    }
+//     constructor(props){
+//         super(props);
+//         this.state = { users : [] };
+//         this.getUserID = this.getUserID.bind(this);
+//         this.onChangeFn = this.onChangeFn.bind(this);
+//         this.onChangeLn = this.onChangeLn.bind(this);
+//         this.onChangeContact = this.onChangeContact.bind(this);
+//     }
+//     componentDidMount(){
+//         this.getUserID();
+//     }
+//     getUserID(){
+//         fetch('http://localhost:3001/users')
+//         .then(response => response.json() )
+//         .then(users =>  this.setState({users}));
+//     }
     render(){
         return(
             <React.Fragment>
