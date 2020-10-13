@@ -49,7 +49,7 @@ app.get('/users', (req, res) => {
 })
 
 // get user by id 
-app.get('/getUser/:id', (req, res) => {
+app.get('/user/:id', (req, res) => {
     const sql = "SELECT * FROM users WHERE id = ?";
     con.query(sql, [ req.params.id ] , function( err, rows ){
         if(!err){
@@ -88,10 +88,10 @@ app.post('/user/create', (req, res) => {
     })
 })
 // update users by id 
-app.put('/update', (req, res) => {
+app.put('/user/update', (req, res) => {
     let emp = req.body;
-    const sql = "UPDATE users SET fname=?, lname=? WHERE id=?";
-    con.query(sql, [ emp.fname, emp.lname, emp.id ] , function( err, rows ){
+    const sql = "UPDATE users SET fname=?, lname=?, contact=? WHERE id=?";
+    con.query(sql, [ emp.fname, emp.lname, emp.contact, emp.id ] , function( err, rows ){
         if(!err){
             res.send("Update success")
         }else{

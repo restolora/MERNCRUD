@@ -1,8 +1,6 @@
 import React, { Component } from "react"
 import { BrowserRouter as Router, Route, Link } from "react-router-dom"
 import Axios from 'axios'
-
-
 // components
 import UpdateUser from './components/UpdateUser'
 
@@ -36,20 +34,19 @@ class App extends Component{
     onDelete(id){
         Axios.delete(`http://localhost:3001/user/delete/${id}`)
         .then(() => {
-            alert('New user is created succressfully.');
+            alert('The user with ID: ' + id +' is removed.');
             this.getUsers();
         });
-        
     }
     submit = (e) => {
         e.preventDefault();
-        Axios.post('http://localhost:3001/user/create', { fname: this.state.fname , lname: this.state.lname, contact: this.state.contact }).then(() => {
+        Axios.post('http://localhost:3001/user/create', 
+        { fname: this.state.fname , lname: this.state.lname, contact: this.state.contact })
+        .then(() => {
             alert('New user is created succressfully.');
             this.getUsers();
-        });
+        }, e.target.reset()).catch(err => console.log(err));
     }
-
-
 
     render(){       
         return(
@@ -67,35 +64,45 @@ class App extends Component{
                                     </div>
                                     <div className="body">
                                         <form onSubmit={this.submit}>
-                                            <input 
-                                                type="text"
-                                                name="fname"
-                                                placeholder="First Name" 
-                                                required={true}
-                                                onChange={this.onChangeFn}
-                                            />
-                                            <br/>
-                                            <input 
-                                                type="text"
-                                                name="lname"
-                                                placeholder="Last Name"
-                                                required={true}
-                                                onChange={this.onChangeLn}
-                                            />
-                                            <br/>
-                                            <input 
-                                                type="text"
-                                                name="contact"
-                                                placeholder="Contact"
-                                                onChange={this.onChangeContact}
-                                            />
-                                            <br/>
-                                            <input 
-                                                type="submit"
-                                                className="btn"
-                                                name="btnSubmit"
-                                                value="Submit"
-                                            />
+                                            <div className="form-h">
+                                                <div className="d-flex">
+                                                    <h3> Registration of new user </h3>
+                                                </div>
+                                            </div> 
+                                            <div className="d-flex">
+                                                <input 
+                                                    type="text"
+                                                    name="fname"
+                                                    placeholder="First Name" 
+                                                    required={true}
+                                                    onChange={this.onChangeFn}
+                                                />
+                                            </div>
+                                            <div className="d-flex">
+                                                <input 
+                                                    type="text"
+                                                    name="lname"
+                                                    placeholder="Last Name"
+                                                    required={true}
+                                                    onChange={this.onChangeLn}
+                                                />
+                                            </div>
+                                            <div className="d-flex">
+                                                <input 
+                                                    type="text"
+                                                    name="contact"
+                                                    placeholder="Contact"
+                                                    onChange={this.onChangeContact}
+                                                />
+                                            </div>
+                                            <div className="d-flex">
+                                                <input 
+                                                    type="submit"
+                                                    className="btn"
+                                                    name="btnSubmit"
+                                                    value="Submit"
+                                                />
+                                            </div>
                                         </form>
                                     </div> 
                                 </div>
@@ -117,8 +124,13 @@ class App extends Component{
                                                 <td>{users.lname}</td>
                                                 <td>{users.contact}</td>
                                                 <td>
-                                                    <button className="btn actions btnEdit" ><Link to={`/update-user/${users.id}`}>Edit</Link></button>
-                                                    <button className="btn actions btnDel" onClick={this.onDelete.bind(this, users.id)}>Delete</button>
+                                                    <button className="btn actions btnEdit">
+                                                        <Link to={`/update-user/${users.id}`}>Edit</Link>
+                                                    </button>
+                                                    <button 
+                                                        className="btn actions btnDel" 
+                                                        onClick={this.onDelete.bind(this, users.id)}
+                                                    >Delete</button>
                                                 </td>
                                             </tr>
                                         )}
@@ -128,9 +140,8 @@ class App extends Component{
                         </React.Fragment>
                     )}
                 />
-                <Route path="/update-user/:id">
-                    <UpdateUser getUsers={this.getUsers} />
-                </Route>
+                <Route path="/update-user/:id" component={UpdateUser} />
+                    {/* <UpdateUser getUsers={this.getUsers} /> */}
             </main>
         </Router>
         )
