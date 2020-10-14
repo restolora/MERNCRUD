@@ -63,7 +63,7 @@ class UpdateUser extends Component{
         return(
             <React.Fragment>
                 <div className="main-content">
-                    <div className="container">
+                    <div className="head-content">
                         <div className="head">
                             <h1>Simple CRUD Application</h1>
                                 <p></p> 

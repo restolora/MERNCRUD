@@ -58,7 +58,7 @@ class App extends Component{
                     render={props => (
                         <React.Fragment>
                             <div className="main-content">
-                                <div className="container">
+                                <div className="head-content">
                                     <div className="head">
                                         <h1>Simple CRUD Application</h1>
                                     </div>
@@ -100,7 +100,7 @@ class App extends Component{
                                                     type="submit"
                                                     className="btn"
                                                     name="btnSubmit"
-                                                    value="Submit"
+                                                    value="Register"
                                                 />
                                             </div>
                                         </form>
