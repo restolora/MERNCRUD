@@ -56,6 +56,7 @@ class UpdateUser extends Component{
         }).catch(err => console.log(err));
     }
 
+
     render(){
         const contact = this.state.contact === null  ? '' : this.state.contact 
         const fname = this.state.fname === null  ? '' : this.state.fname 
