@@ -8,10 +8,8 @@ const app = express();
 app.use(parser.json());
 app.use(cors());
 
-
-// db connection
+// mysql db connection
 const mysql = require('mysql');
-
 var con = mysql.createConnection({
     host: "localhost",
     user: 'root',
@@ -27,8 +25,6 @@ con.connect((err) => {
         console.log('Connection err: ' + err);
     }
 })
-
-
 // api
 const port = 3001;
 app.listen(port, function(){
@@ -51,7 +47,7 @@ app.get('/users', (req, res) => {
 // get user by id 
 app.get('/user/:id', (req, res) => {
     const sql = "SELECT * FROM users WHERE id = ?";
-    con.query(sql, [ req.params.id ] , function( err, rows ){
+    con.query(sql, [ req. params.id ] , function( err, rows ){
         if(!err){
             res.send(rows)
         }else{

@@ -32,7 +32,8 @@ class App extends Component{
         this.setState({ contact: e.target.value })
     }
     onDelete(id){
-        Axios.delete(`http://localhost:3001/user/delete/${id}`)
+        
+        Axios.delete(`http://localhost:3001/users/delete/${id}`)
         .then(() => {
             alert('The user with ID: ' + id +' is removed.');
             this.getUsers();
@@ -40,7 +41,7 @@ class App extends Component{
     }
     submit = (e) => {
         e.preventDefault();
-        Axios.post('http://localhost:3001/user/create', 
+        Axios.post('http://localhost:3001/users/create', 
         { fname: this.state.fname , lname: this.state.lname, contact: this.state.contact })
         .then(() => {
             alert('New user is created succressfully.');
@@ -119,17 +120,17 @@ class App extends Component{
                                     </thead>
                                     <tbody>
                                         {this.state.users.map(users =>
-                                            <tr key={users.id}>
+                                            <tr key={users._id}>
                                                 <td>{users.fname}</td>
                                                 <td>{users.lname}</td>
                                                 <td>{users.contact}</td>
                                                 <td>
-                                                    <button className="btn actions btnEdit">
-                                                        <Link to={`/update-user/${users.id}`}>Edit</Link>
-                                                    </button>
+                                                    
+                                                        <Link to={`/update-user/${users._id}`}><button className="btn actions btnEdit">Edit</button></Link>
+                                                    
                                                     <button 
-                                                        className="btn actions btnDel" 
-                                                        onClick={this.onDelete.bind(this, users.id)}
+                                                        className="btn actions  btnDel" 
+                                                        onClick={this.onDelete.bind(this, users._id)}
                                                     >Delete</button>
                                                 </td>
                                             </tr>

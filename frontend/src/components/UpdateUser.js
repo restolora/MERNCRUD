@@ -22,10 +22,10 @@ class UpdateUser extends Component{
     }
     getUser(){
         let id = this.props.match.params.id
-        Axios.get(`http://localhost:3001/user/${id}`)
+        Axios.get(`http://localhost:3001/users/${id}`)
         .then((user) => {
             this.setState({
-                id: user.data[0].id,
+                id: user.data[0]._id,
                 fname: user.data[0].fname,
                 lname: user.data[0].lname,
                 contact: user.data[0].contact
@@ -48,8 +48,8 @@ class UpdateUser extends Component{
     submitUpdate(e){
         e.preventDefault();
         // console.log(this.state.fname);
-        Axios.put('http://localhost:3001/user/update',
-        { fname: this.state.fname , lname: this.state.lname, contact: this.state.contact, id: this.state.id })
+        Axios.put('http://localhost:3001/users/update',
+        { fname: this.state.fname , lname: this.state.lname, contact: this.state.contact, _id: this.state.id })
         .then(() => {
             alert('User is updated succressfully.');            
             
